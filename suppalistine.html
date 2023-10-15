@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palestine Supporter</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: linear-gradient(to right, green, white, black);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            margin: 0;
+            background-color: red;
+            width:100%;
+            border-color: red;
+            top: 0px;
+            display: flex;
+            justify-content: center;
+            align-self: center;
+        }
+        .intro{
+            margin: 10px;
+            color: yellow;
+            font-weight: bold;
+            font-size: 20px;
+            -webkit-text-stroke: 1px black; 
+}
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .input {
+            width: 58%;
+            margin: 5px;
+            border: 2px solid black;
+            padding: 10px;
+            background-color:white;
+            font-weight: 600;
+            color: black;
+            font-family: 'Poppins', sans-serif;
+        }
+        .input:focus{
+            border: none;
+            outline: none;
+    
+        }
+
+       
+
+        #output {
+            margin-top: 20px;
+            position: absolute;
+            right: 50%;
+        }
+
+        #output img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        #support-text {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Palestine Supporter</h1>
+    </header>
+    <p class="intro"> Welcome to <b>support palestine</b>, your support hub for Palestine. Amidst adversity, Palestinians exhibit remarkable resilience.
+
+        In this historical land, conflict has led to immense suffering but also sparked global solidarity.
+        
+        At <b>support palestine</b>, we advocate for peace, justice, and Palestinian rights, fostering empathy through articles, stories, and documentaries.
+        
+        We act, channeling resources for vital relief and education. Join us. Together, we foster hope and change for Palestine.
+        
+        Thank you for visiting. Stand with us for a future of peace, justice, and prosperity.</p>
+
+    <div class="container" id="container">
+        <label for="name">Name:</label>
+        <input class="input" type="text" id="name" placeholder="Enter your name" required><br><br>
+
+        <label for="country">Country:</label>
+        <input class="input" type="text" id="country" placeholder="Enter your country" required><br><br>
+
+        <label for="pic">Upload a picture:</label>
+        <input class="inputup" type="file"  accept="image/*" name="image" id="pic" required"><br><br>
+                                    
+        
+
+        <button onclick="generateImage()">Generate Support Pic</button>
+    </div>
+    <div id="output"></div>
+    <script>
+        function generateImage() {
+            var name = document.getElementById('name').value;
+            var country = document.getElementById('country').value;
+            var pic = document.getElementById('pic').files[0];
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var img = new Image();
+                img.src = e.target.result;
+                img.onload = function () {
+                    var canvas = document.createElement('canvas');
+                    canvas.width = 400;
+                    canvas.height = 400;
+                    var ctx = canvas.getContext('2d');
+                    ctx.fillStyle = '#000';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 100, 50, 200, 200);
+                    var flag = new Image();
+                    flag.src = '1200px-Flag_of_Palestine_(vertical).svg.png';
+                    flag.onload = function () {
+                        ctx.globalAlpha = 0.3;
+                        ctx.drawImage(flag, 0, 0, canvas.width, canvas.height);
+                        ctx.globalAlpha = 1;
+                        ctx.fillStyle = 'white';
+                        ctx.font = '25px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('My Name is ' + name  , canvas.width / 2, canvas.height - 100);
+                        ctx.fillText('I\'m from ' + country ,canvas.width / 2, canvas.height - 70);
+                        ctx.fillText(' and We Stand with Palestine',canvas.width / 2, canvas.height - 40);
+                        var output = document.getElementById('output');
+                        output.innerHTML = '';
+                        output.appendChild(canvas);
+                         
+                        
+                    };
+                };
+            };
+           
+            reader.readAsDataURL(pic);
+            document.getElementById('container').remove()
+        }
+        
+    </script>
+</body>
+
+</html>
