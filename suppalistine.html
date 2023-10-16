@@ -149,7 +149,6 @@
     <div id="output"></div>
     <div id="buttons" style="display: none;">
         <button id="saveButton">Save Image</button>
-        <button id="shareButton">Share on Social Media</button>
     </div>
     <div class="conclusion">
         <p>Thank you for taking a stand and joining our Global Impact Campaign. Your support matters, and by creating your own SUPPORT BADGE, you're helping us reach our goal of uniting 1,000,000 supporters worldwide. Together, we amplify our voice and make a difference. Your badge is not just an image; it's a symbol of solidarity and hope. Let's show the world where we stand, together we are unstoppable. Thank you for being a part of this powerful movement. ✊ #SupportPalestine</p>
@@ -198,18 +197,7 @@
                             link.download = 'support_badge.png';
                             link.click();
                         };
-
-                        var shareButton = document.createElement('button');
-                        shareButton.textContent = 'Share on Social Media';
-                        shareButton.onclick = function() {
-                            // Define the social media share URL here
-                            var socialMediaShareUrl = 'whatsapp://send?text=Check%20out%20this%20image:&amp;dataurl=' + encodeURIComponent(imageDataURL); // Replace with actual share URL
-                            window.open(socialMediaShareUrl, '_blank');
-                        };
-
-                        // Append buttons to the document
                         output.appendChild(saveButton);
-                        output.appendChild(shareButton);
                     };
                 };
             };
